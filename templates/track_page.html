@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о треке</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Информация о треке</h1>
+    </div>
+    <div class="main">
+        <div class="info">
+            <table>
+                <tr>
+                    <td>Название:</td>
+                    <td>{{ track.name }}</td>
+                </tr>
+                <tr>
+                    <td>Исполнители:</td>
+                    <td>{{ ', '.join(track.artists) }}</td>
+                </tr>
+                <tr>
+                    <td>Альбом:</td>
+                    <td>{{ track.album }}</td>
+                </tr>
+                <tr>
+                    <td>Превью:</td>
+                    <td>
+                        <audio src="{{ track.preview_url }}" controls></audio>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Длительность:</td>
+                    <td>{{ track.duration_ms // 1000 }} сек.</td>
+                </tr>
+            </table>
+        </div>
+        <div class="cover">
+            <img src="{{ track.cover_url }}" alt="Обложка альбома">
+        </div>
+    </div>
+    <div class="footer">
+        <div class="links">
+            <div class="spotify-link">
+                <a href="{{ track.spotify_url }}">Ссылка на Spotify</a>
+            </div>
+            <div class="songsterr-link">
+                <a href="{{ track.songsterr_link }}">Ссылка на Songsterr</a>
+            </div>
+            <div class="youtube-link">
+                <a href="{{ track.youtube_link }}">Ссылка на Youtube</a>
+            </div>
+        </div>
+        <div class="download">
+            <form action="/download_track" method="GET">
+                <input type="hidden" name="youtube_link" value="{{ track.youtube_link }}">
+                <button onclick="downloadTrack('{{ track.youtube_link }}')">Скачать трек</button>
+            </form>
+        </div>
+
+        <div class="download">
+            <form action="/download_score" method="GET">
+                <input type="hidden" name="songsterr_link" value="{{ track.songsterr_link }}">
+                <button onclick="downloadTrack('{{ track.youtube_link }}')">Скачать табулатуру</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+<script>
+    function downloadTrack(link) {
+        window.location.href = '/download-track?link=' + link;
+    }
+</script>

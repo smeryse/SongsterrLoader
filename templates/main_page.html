@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Music Helper</title>
+    <style>
+        .search-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80px;
+        }
+
+        .search-box input[type="text"],
+        .search-box button {
+            height: 40px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .search-box input[type="text"] {
+            padding: 5px;
+            margin-right: 10px;
+            flex-grow: 1;
+        }
+
+        .search-box button {
+            padding: 5px 20px;
+            cursor: pointer;
+        }
+
+    </style>
+    <link rel="stylesheet" href="../static/css/style.css">
+
+</head>
+<body>
+<h1>
+    Songsterr Helper
+</h1>
+<!-- Поле поиска и кнопка поиска -->
+<div class="search-box">
+    <form action="/search" method="GET">
+        <label>
+            <input type="text" name="q" autofocus>
+        </label>
+        <button type="submit">search</button>
+    </form>
+    <form action="/download" method="GET">
+        <label>
+            <input type="text" name="link" pattern="^https:\/\/www\.songsterr\.com\/a\/wsa\/[a-z0-9-]+-tab-s[0-9]+$">
+        </label>
+        <button type="submit">load</button>
+    </form>
+</div>
+<img src="../static/img/logo.jpg" width="640" height="640" alt="logo.jpg">
+</body>
+</html>

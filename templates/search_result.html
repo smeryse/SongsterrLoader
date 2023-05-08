@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о треке</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        button {
+            border-image-width: auto;
+            border-color: #4CAF50;
+            border-bottom-style: unset;
+            background-color: transparent;
+        }
+
+    </style>
+    <meta charset="UTF-8">
+    <title>Поиск</title>
+</head>
+<body>
+<h1>Результаты поиска</h1>
+<ul>
+    {% for track in tracks %}
+    <form action="/track_page" method="GET">
+        <input type="hidden" name="link" value="{{ track.link }}">
+        <button type="submit"><a>{{ track.title }} - {{ track.artist }}</a></button>
+    </form>
+    {% endfor %}
+
+</ul>
+</body>
+</html>
